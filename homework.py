@@ -87,7 +87,7 @@ class SportsWalking(Training):
 class Swimming(Training):
     """Тренировка: плавание."""
     coeff_calorie_5 = 1.1
-    coeff_calorie_6 = 2.0
+    coeff_calorie_6 = 2.1
     LEN_STEP: float = 1.38
     def __init__(self, action: int, duration: float, weight: float,
                  length_pool: float, count_pool: int) -> None:
