@@ -64,7 +64,6 @@ class Running(Training):
                 * (self.duration * Running.VMIN))
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
-
     COEFF_CALORIE_3 = 0.035
     COEFF_CALORIE_4 = 0.029
 
