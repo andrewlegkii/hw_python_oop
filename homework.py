@@ -86,7 +86,7 @@ class SportsWalking(Training):
 
 class Swimming(Training):
     """Тренировка: плавание."""
-    coeff_calorie_5 = 1.1
+    coeff_calorie_5 = 1.3
     coeff_calorie_6 = 2.1
     LEN_STEP: float = 1.38
     def __init__(self, action: int, duration: float, weight: float,
@@ -129,5 +129,8 @@ if __name__ == '__main__':
 
     for workout_type, data in packages:
         training = read_package(workout_type, data)
-        main(training)
+        if training is None:
+            print('Неожиданный тип тренировки')
+        else:
+            main(training)
 
