@@ -105,7 +105,9 @@ class Swimming(Training):
         calories = calories_1 * self.CF_SW_2 * self.weight
         return calories
 def read_package(workout_type: str, data: list) -> Training:
-    type_dict = {'SWM': Swimming, 'RUN': Running, 'WLK': SportsWalking}
+    type_dict = {'SWM': Swimming, 
+    'RUN': Running, 
+    'WLK': SportsWalking}
     return type_dict[workout_type](*data)
 def main(training: Training) -> None:
     info = training.show_training_info()
