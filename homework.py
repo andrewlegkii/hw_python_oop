@@ -38,11 +38,9 @@ class Training:
     def get_distance(self) -> float:
         return self.action * self.LEN_STEP / self.M_IN_KM
         
-
     def get_mean_speed(self) -> float:
         return self.get_distance() / self.duration
         
-
     def get_spent_calories(self) -> float:
         raise NotImplementedError
 
@@ -110,7 +108,6 @@ class Swimming(Training):
     def get_mean_speed(self) -> float:
         return self.length_pool * self.count_pool
         
-
     def get_spent_calories(self) -> float:
         calories_1 = self.get_mean_speed() + self.CF_SW_1
         calories = calories_1 * self.CF_SW_2 * self.weight
