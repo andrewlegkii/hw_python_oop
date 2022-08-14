@@ -1,6 +1,6 @@
 import re
-import pytest
 import types
+import pytest
 import inspect
 from conftest import Capturing
 
