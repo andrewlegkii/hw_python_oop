@@ -23,7 +23,7 @@ class InfoMessage:
 
 class Training:
     """Базовый класс тренировки."""
-    
+
     LEN_STEP = 0.65
     M_IN_KM = 1000
 
@@ -55,7 +55,7 @@ class Training:
 
 class Running(Training):
     """Тренировка: бег."""
-    
+
     CF_RUN_1 = 18
     CF_RUN_2 = 20
     minutes = 60
@@ -68,7 +68,7 @@ class Running(Training):
 
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
-    
+
     DEGREE_WALK_1 = 0.035
     DEGREE_WALK_2 = 2
     DEGREE_WALK_3 = 0.029
