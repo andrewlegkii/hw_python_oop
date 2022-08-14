@@ -23,6 +23,7 @@ class InfoMessage:
 
 class Training:
     """Базовый класс тренировки."""
+    
     LEN_STEP = 0.65
     M_IN_KM = 1000
 
@@ -51,8 +52,10 @@ class Training:
                            self.get_mean_speed(),
                            self.get_spent_calories())
 
+
 class Running(Training):
     """Тренировка: бег."""
+    
     CF_RUN_1 = 18
     CF_RUN_2 = 20
     minutes = 60
@@ -62,8 +65,10 @@ class Running(Training):
         calories = cal * self.weight / self.M_IN_KM * self.duration * self.minutes
         return calories
 
+
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
+    
     DEGREE_WALK_1 = 0.035
     DEGREE_WALK_2 = 2
     DEGREE_WALK_3 = 0.029
@@ -84,6 +89,7 @@ class SportsWalking(Training):
 
 class Swimming(Training):
     """Тренировка: плавание."""
+
     CF_SW_1 = 1.1
     CF_SW_2 = 2
     LEN_STEP = 1.38
@@ -105,6 +111,7 @@ class Swimming(Training):
         calories_1 = self.get_mean_speed() + self.CF_SW_1
         calories = calories_1 * self.CF_SW_2 * self.weight
         return calories
+
 
 def read_package(workout_type: str, int) -> Training:
     type_dict = {'SWM': Swimming, 'RUN': Running, 'WLK': SportsWalking}
