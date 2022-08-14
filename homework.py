@@ -45,8 +45,7 @@ class Training:
         raise NotImplementedError
 
     def show_training_info(self) -> InfoMessage:
-        return InfoMessage(
-                                self.__class__.__name__,
+        return InfoMessage(self.__class__.__name__,
                                    self.duration,
                                    self.get_distance(),
                                    self.get_mean_speed(),
