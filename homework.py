@@ -1,6 +1,3 @@
-from turtle import distance
-
-
 class InfoMessage:
     """Информационное сообщение о тренировке."""
 
@@ -115,10 +112,8 @@ class Swimming(Training):
         distance_1 = self.length_pool * self.count_pool
         self.distance_1 = distance_1 / super().M_IN_KM / self.duration 
 
-
     def get_spent_calories(self) -> float:
-        calories = (self.get_mean_speed() + self.CF_SW_1) * self.CF_SW_2 * self.weight
-        return calories
+        return (self.get_mean_speed() + self.CF_SW_1) * self.CF_SW_2 * self.weight
 
 
 def read_package(workout_type: str, int) -> Training:
