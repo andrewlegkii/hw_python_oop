@@ -6,17 +6,17 @@ class InfoMessage:
                  distance: float,
                  speed: float,
                  calories: float,
-                 ) -> None: 
+                 ) -> None:
 
         self.training_type = training_type
-        self.distance = distance 
+        self.distance = distance
         """КМ"""
-        self.speed = speed 
+        self.speed = speed
         """КМ/Ч"""
         self.calories = calories
-        self.duration = duration 
+        self.duration = duration
         """Часы"""
- 
+
     def get_message(self) -> str:
         return (f'Тип тренировки: {self.training_type}; '
                 f'Длительность: {self.duration:.3f} ч.; '
@@ -49,13 +49,12 @@ class Training:
         raise NotImplementedError
 
     def show_training_info(self) -> InfoMessage:
-        info_message = InfoMessage(
-                        self.__class__.__name__,
-                        self.duration, 
-                        self.get_distance(),
-                        self.get_mean_speed(),
-                        self.get_spent_calories()
-                       )
+        info_message = InfoMessage(self.__class__.__name__,
+                                   self.duration,
+                                   self.get_distance(),
+                                   self.get_mean_speed(),
+                                   self.get_spent_calories()
+                                  )
         return info_message
 
 
@@ -69,13 +68,14 @@ class Running(Training):
         cal = self.CF_RUN_1 * self.get_mean_speed() - self.CF_RUN_2
         return cal * self.weight / self.M_IN_KM * self.duration * self.time_1
 
+
 class SportsWalking(Training):
     """Тренировка: спортивная ходьба."""
     COEFF1 = 0.035
     COEFF2 = 2
     COEFF3 = 0.029
     TRAINING_TYPE = 'WLK'
-
+    
     def __init__(self,
                  action: int,
                  duration: float,
@@ -85,9 +85,10 @@ class SportsWalking(Training):
         self.height = height
 
     def get_spent_calories(self) -> float:
-        calories = (((self.COEFF1 * self.weight) + 
-                   (self.get_mean_speed()**2 // self.height) * 
-                   self.COEFF3 * self.weight) * self.duration * 60)
+        return (self.COEFF1 * self.weight
+                + (self.get_mean_speed()**2 // self.height)
+                * self.COEFF3 * self.weight) * (self.duration
+                                                         * Running.time_1)
         return calories 
 
  
@@ -138,4 +139,7 @@ if __name__ == '__main__':
 
     for workout_type, data in packages:
         training = read_package(workout_type, data)
-        main(training)
+        if training is None:
+            print('Неожиданный тип тренировки')
+        else:
+            main(training)
