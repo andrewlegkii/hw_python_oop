@@ -54,7 +54,7 @@ class Training:
                                    self.get_distance(),
                                    self.get_mean_speed(),
                                    self.get_spent_calories()
-                                  )
+                                   )
         return info_message
 
 
@@ -74,8 +74,9 @@ class SportsWalking(Training):
     COEFF1 = 0.035
     COEFF2 = 2
     COEFF3 = 0.029
+    time_2 = 60
     TRAINING_TYPE = 'WLK'
-    
+
     def __init__(self,
                  action: int,
                  duration: float,
@@ -88,12 +89,8 @@ class SportsWalking(Training):
         return (self.COEFF1 * self.weight
                 + (self.get_mean_speed()**2 // self.height)
                 * self.COEFF3 * self.weight) * (self.duration
-                                                         * Running.time_1)
-        return calories 
+                                                         * self.time_2)
 
- 
-
- 
 
 class Swimming(Training):
     """Тренировка: плавание."""
