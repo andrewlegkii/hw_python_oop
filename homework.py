@@ -1,25 +1,26 @@
+from __future__ import annotations
+MINS: int = 60
+from dataclasses import asdict, dataclass
+
+@dataclass(init=True)
 class InfoMessage:
     """Информационное сообщение о тренировке. Пояснения: speed=КМ/Ч;
      distance=КМ; duration=Часы"""
-    def __init__(self, training_type: str,
-                 duration: float,
-                 distance: float,
-                 speed: float,
-                 calories: float,
-                 ) -> None:
-
-        self.training_type = training_type
-        self.distance = distance
-        self.speed = speed
-        self.calories = calories
-        self.duration = duration
+    self: str
+    training_type: str
+    duration: float
+    distance: float
+    speed: float
+    calories: float
+    message = (
+        'Тип тренировки: {training_type}; '
+        'Длительность: {duration:.3f} ч.; '
+        'Дистанция: {distance:.3f} км; Ср. скорость: {speed:.3f} км/ч; '
+        'Потрачено ккал: {calories:.3f}.'
+    )
 
     def get_message(self) -> str:
-        return (f'Тип тренировки: {self.training_type}; '
-                f'Длительность: {self.duration:.3f} ч.; '
-                f'Дистанция: {self.distance:.3f} км; '
-                f'Ср. скорость: {self.speed:.3f} км/ч; '
-                f'Потрачено ккал: {self.calories:.3f}.')
+        return self.text.format(**asdict(self))
 
 
 class Training:
@@ -47,22 +48,22 @@ class Training:
 
     def show_training_info(self) -> InfoMessage:
         return InfoMessage(
-            self.__class__.__name__,
             self.duration,
             self.get_distance(),
             self.get_mean_speed(),
-            self.get_spent_calories())
+            self.get_spent_calories()
+    )
 
 
 class Running(Training):
     """Тренировка: бег."""
     CF_RUN_1: int = 18
     CF_RUN_2: int = 20
-    MINS: int = 60
+    global MINS
 
     def get_spent_calories(self) -> float:
         cal = self.CF_RUN_1 * self.get_mean_speed() - self.CF_RUN_2
-        return cal * self.weight / self.M_IN_KM * self.duration * self.MINS
+        return cal * self.weight / self.M_IN_KM * self.duration * MINS
 
 
 class SportsWalking(Training):
@@ -70,7 +71,7 @@ class SportsWalking(Training):
     COEFF1: float = 0.035
     COEFF2: int = 2
     COEFF3: float = 0.029
-    MINS_IN_HOUR = 60
+    global MINS
 
     def __init__(self,
                  action: int,
@@ -84,7 +85,7 @@ class SportsWalking(Training):
         return ((self.COEFF1 * self.weight
                 + (self.get_mean_speed()**2 // self.height)
                 * self.COEFF3 * self.weight) * (self.duration
-                * self.MINS_IN_HOUR))
+                * MINS))
 
 
 class Swimming(Training):
@@ -112,16 +113,14 @@ class Swimming(Training):
         return men_speed_with_coef * self.CF_SW_2 * self.weight
 
 
-def read_package(workout_type: str, data: list) -> Training:
+def read_package(workout_type: str, data: list[int]) -> Training:
     type_dict = {'SWM': Swimming, 'RUN': Running, 'WLK': SportsWalking}
-    data: list[int]
+    type_dict: list[str]
     return type_dict[workout_type](*data)
-
-
-try:
-    workout_type = {'SWM': Swimming, 'RUN': Running, 'WLK': SportsWalking}
-except KeyError:
-    raise KeyError('Неизвестный тип тренировки')
+    try:
+        return type_dict[workout_type](*data)
+    except KeyError:
+        raise KeyError('Неизвестный тип тренировки')
 
 
 def main(training: Training) -> None:
