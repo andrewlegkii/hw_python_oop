@@ -14,7 +14,7 @@ class InfoMessage:
     distance: float
     speed: float
     calories: float
-    message = (
+    text = (
         'Тип тренировки: {training_type}; '
         'Длительность: {duration:.3f} ч.; '
         'Дистанция: {distance:.3f} км; Ср. скорость: {speed:.3f} км/ч; '
@@ -50,6 +50,7 @@ class Training:
 
     def show_training_info(self) -> InfoMessage:
         return InfoMessage(
+            self.__class__.__name__,
             self.duration,
             self.get_distance(),
             self.get_mean_speed(),
