@@ -1,16 +1,17 @@
 from msilib import sequence
 
+from dataclasses import asdict, dataclass
+@dataclass
 
 class InfoMessage:
     """Информационное сообщение о тренировке. Пояснения: speed=КМ/Ч;
      distance=КМ; duration=Часы"""
-
-    def __init__(self, training_type: str,
-                 duration: float,
-                 distance: float,
-                 speed: float,
-                 calories: float,
-                 ) -> None:
+    def __init__(self, training_type,
+                 duration,
+                 distance,
+                 speed,
+                 calories,
+                 ):
 
         self.training_type = training_type
         self.distance = distance
@@ -119,7 +120,7 @@ class Swimming(Training):
 
 def read_package(workout_type: str, data: sequence) -> Training:
     type_dict = {'SWM': Swimming, 'RUN': Running, 'WLK': SportsWalking}
-    type_dict: sequence [int]
+    data: sequence [int]
     return type_dict[workout_type](*data)
 try:
     workout_type = {'SWM': Swimming, 'RUN': Running, 'WLK': SportsWalking}
