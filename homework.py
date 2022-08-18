@@ -54,15 +54,14 @@ class Training:
             self.duration,
             self.get_distance(),
             self.get_mean_speed(),
-            self.get_spent_calories()
-    )
+            self.get_spent_calories())
 
 
 class Running(Training):
     """Тренировка: бег."""
     CF_RUN_1: int = 18
     CF_RUN_2: int = 20
-    MINS_IN_HOUR: int= 60
+    MINS_IN_HOUR: int = 60
 
     def get_spent_calories(self) -> float:
         cal = self.CF_RUN_1 * self.get_mean_speed() - self.CF_RUN_2
@@ -113,7 +112,7 @@ class Swimming(Training):
         return total_distance / self.M_IN_KM / self.duration
 
     def get_spent_calories(self) -> int:
-        men_speed_with_coef = self.get_mean_speed() + self.CF_SW_1     
+        men_speed_with_coef = self.get_mean_speed() + self.CF_SW_1 
         return men_speed_with_coef * self.CF_SW_2 * self.weight
 
 
@@ -121,6 +120,7 @@ def read_package(workout_type: str, data: sequence) -> Training:
     type_dict = {'SWM': Swimming, 'RUN': Running, 'WLK': SportsWalking}
     data: sequence[int]
     return type_dict[workout_type](*data)
+
 
 try:
     workout_type = {'SWM': Swimming, 'RUN': Running, 'WLK': SportsWalking}
