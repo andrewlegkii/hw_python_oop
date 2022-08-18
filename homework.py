@@ -1,17 +1,15 @@
 from msilib import sequence
 
-from dataclasses import asdict, dataclass
-@dataclass
 
 class InfoMessage:
     """Информационное сообщение о тренировке. Пояснения: speed=КМ/Ч;
      distance=КМ; duration=Часы"""
-    def __init__(self, training_type,
-                 duration,
-                 distance,
-                 speed,
-                 calories,
-                 ):
+    def __init__(self, training_type: str,
+                 duration: float,
+                 distance: float,
+                 speed: float,
+                 calories: float,
+                 ) -> None:
 
         self.training_type = training_type
         self.distance = distance
