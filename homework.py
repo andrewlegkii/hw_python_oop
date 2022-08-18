@@ -1,6 +1,3 @@
-from msilib import sequence
-
-
 class InfoMessage:
     """Информационное сообщение о тренировке. Пояснения: speed=КМ/Ч;
      distance=КМ; duration=Часы"""
@@ -116,9 +113,9 @@ class Swimming(Training):
         return men_speed_with_coef * self.CF_SW_2 * self.weight
 
 
-def read_package(workout_type: str, data: sequence) -> Training:
+def read_package(workout_type: str, data: list) -> Training:
     type_dict = {'SWM': Swimming, 'RUN': Running, 'WLK': SportsWalking}
-    data: sequence[int]
+    data: list[int]
     return type_dict[workout_type](*data)
 
 
