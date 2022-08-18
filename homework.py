@@ -1,8 +1,12 @@
 from __future__ import annotations
-MINS: int = 60
+
 from dataclasses import asdict, dataclass
 
+MINS: int = 60
+
 @dataclass(init=True)
+
+
 class InfoMessage:
     """Информационное сообщение о тренировке. Пояснения: speed=КМ/Ч;
      distance=КМ; duration=Часы"""
@@ -51,8 +55,7 @@ class Training:
             self.duration,
             self.get_distance(),
             self.get_mean_speed(),
-            self.get_spent_calories()
-    )
+            self.get_spent_calories())
 
 
 class Running(Training):
