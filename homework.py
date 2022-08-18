@@ -5,12 +5,9 @@ from dataclasses import asdict, dataclass
 MINS: int = 60
 
 @dataclass(init=True)
-
-
 class InfoMessage:
     """Информационное сообщение о тренировке. Пояснения: speed=КМ/Ч;
      distance=КМ; duration=Часы"""
-    self: str
     training_type: str
     duration: float
     distance: float
