@@ -46,7 +46,7 @@ class Training:
         return self.get_distance() / self.duration
 
     def get_spent_calories(self) -> float:
-        raise NotImplementedError("Критически важный метод для работы всех наследников") #ДОДКЛАТЬ
+        raise NotImplementedError("Для работы всех наследников")
 
     def show_training_info(self) -> InfoMessage:
         return InfoMessage(
@@ -55,18 +55,19 @@ class Training:
             self.get_distance(),
             self.get_mean_speed(),
             self.get_spent_calories()
-            )
+    )
 
 
 class Running(Training):
     """Тренировка: бег."""
     CF_RUN_1: int = 18
     CF_RUN_2: int = 20
-    MINS_IN_HOUR: int= 60 #ОТРЕДАЧИТЬ
+    MINS_IN_HOUR: int= 60
 
     def get_spent_calories(self) -> float:
         cal = self.CF_RUN_1 * self.get_mean_speed() - self.CF_RUN_2
-        return cal * self.weight / self.M_IN_KM * self.duration * self.MINS_IN_HOUR
+        second_var = self.M_IN_KM * self.duration * self.MINS_IN_HOUR
+        return cal * self.weight / second_var
 
 
 class SportsWalking(Training):
@@ -74,7 +75,7 @@ class SportsWalking(Training):
     COEFF1: float = 0.035
     COEFF2: int = 2
     COEFF3: float = 0.029
-    MINS_IN_HOUR = 60 #ОТРЕДАЧИТЬ
+    MINS_IN_HOUR = 60
 
     def __init__(self,
                  action: int,
@@ -112,14 +113,15 @@ class Swimming(Training):
         return total_distance / self.M_IN_KM / self.duration
 
     def get_spent_calories(self) -> int:
-        men_speed_with_coef = self.get_mean_speed() + self.CF_SW_1        
+        men_speed_with_coef = self.get_mean_speed() + self.CF_SW_1     
         return men_speed_with_coef * self.CF_SW_2 * self.weight
 
 
 def read_package(workout_type: str, data: sequence) -> Training:
     type_dict = {'SWM': Swimming, 'RUN': Running, 'WLK': SportsWalking}
-    data: sequence [int]
+    data: sequence[int]
     return type_dict[workout_type](*data)
+
 try:
     workout_type = {'SWM': Swimming, 'RUN': Running, 'WLK': SportsWalking}
 except KeyError:
