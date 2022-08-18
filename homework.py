@@ -112,7 +112,7 @@ class Swimming(Training):
         return total_distance / self.M_IN_KM / self.duration
 
     def get_spent_calories(self) -> int:
-        men_speed_with_coef = self.get_mean_speed() + self.CF_SW_1 
+        men_speed_with_coef = self.get_mean_speed() + self.CF_SW_1
         return men_speed_with_coef * self.CF_SW_2 * self.weight
 
 
