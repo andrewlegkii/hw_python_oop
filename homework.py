@@ -22,7 +22,10 @@ class InfoMessage:
     )
 
     def get_message(self) -> str:
-        return self.text.format(**asdict(self))
+        try: 
+            return self.text.format(**asdict(self)) 
+        except KeyError: 
+            raise KeyError('Форматирование не удалось') 
 
 
 class Training:
@@ -61,7 +64,6 @@ class Running(Training):
     """Тренировка: бег."""
     CF_RUN_1: int = 18
     CF_RUN_2: int = 20
-    global MINS
 
     def get_spent_calories(self) -> float:
         cal = self.CF_RUN_1 * self.get_mean_speed() - self.CF_RUN_2
@@ -73,7 +75,6 @@ class SportsWalking(Training):
     COEFF1: float = 0.035
     COEFF2: int = 2
     COEFF3: float = 0.029
-    global MINS
 
     def __init__(self,
                  action: int,
@@ -117,8 +118,7 @@ class Swimming(Training):
 
 def read_package(workout_type: str, data: list[int]) -> Training:
     type_dict = {'SWM': Swimming, 'RUN': Running, 'WLK': SportsWalking}
-    type_dict: list[str]
-    return type_dict[workout_type](*data)
+    type_dict: dict[Training]
     try:
         return type_dict[workout_type](*data)
     except KeyError:
