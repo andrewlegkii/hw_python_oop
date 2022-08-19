@@ -22,10 +22,10 @@ class InfoMessage:
     )
 
     def get_message(self) -> str:
-        try: 
-            return self.text.format(**asdict(self)) 
-        except KeyError: 
-            raise KeyError('Форматирование не удалось') 
+        try:
+            return self.text.format(**asdict(self))
+        except KeyError:
+            raise KeyError('Форматирование не удалось')
 
 
 class Training:
